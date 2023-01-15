@@ -133,9 +133,10 @@ public class CheckedExceptionHandling {
      * hasta que alguien se encarga de ellas
      */
 
-     // si yo digo que este método lanza una excepción, ya se encargará otro método 
-     // de la pila que lo llame de manejar la excecpón y no tengo error de compilación (aquí)
-     // pero lo tendré en el método que llame a este
+    // si yo digo que este método lanza una excepción, ya se encargará otro método
+    // de la pila que lo llame de manejar la excecpón y no tengo error de
+    // compilación (aquí)
+    // pero lo tendré en el método que llame a este
     public static void leerFichero_v6() throws FileNotFoundException {
         String pathToFile = "C:\\coding\\java\\clase\\exceptions\\hola.txt";
         File file = new File(pathToFile);
@@ -143,12 +144,5 @@ public class CheckedExceptionHandling {
         System.out.println("Esta linea de código no se ejecuta, porque tengo una excepción antes");
 
     }
-
-    /*creo que me queda: ver las uncheked -- aunque no deberían ocurrir puede ser util
-     * meter excepciones que tengan que lanzar tus métodos, el ejemplo de cuenta
-     * crear tus propias excepiones
-     * finally
-     * muliples catch
-     */
 
 }

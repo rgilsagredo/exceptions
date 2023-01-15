@@ -92,7 +92,8 @@ public class App {
          * siempre con
          * actividades de I/O, conexiones a DBs, no poder hacer ciertas acciones (ya
          * vimos que para poder clonar
-         * un objeto hay que implementar un método y una interfaz, sin ambos, tenemos
+         * un objeto hay que implementar un
+         * método y una interfaz, sin ambos, tenemos
          * una checked exception).
          * 
          * Un poco más adelante lo vemos con más detalle, pero las excepciones tienen
@@ -209,8 +210,28 @@ public class App {
         // CheckedExceptionHandling.leerFichero_v4();
         // System.out.println("el programa sigue");
 
-        // esto me dice que unhandled exception, porque el método pasa el marrón a otro método que lo llame
+        // esto me dice que unhandled exception, porque el método pasa el marrón a otro
+        // método que lo llame
         // CheckedExceptionHandling.leerFichero_v6();
+
+        // aunque un método pueda lanzar una excecpión, si esta no ocurre, no se lanza
+        // String str = "asd";
+        // System.out.println(UncheckedExceptionHandling.stringLength_v3(str));
+
+        // String str = null;
+        // System.out.println(UncheckedExceptionHandling.stringLength_v3(str));
+        // System.out.println("Si se lanza la excepción y no la manejasmo, el programa
+        // explota. Esta linea no se ejecuta");
+
+        // si manejamos la exception, el programa finaliza bien
+        // String str = null;
+        // try {
+        //     System.out.println(UncheckedExceptionHandling.stringLength_v3(str));
+        // } catch (NullPointerException npe) {
+        //     System.out.println("Excepción pillada");
+        // }
+        // System.out.println("Si se lanza la excepción y no la manejasmo, el programa explota. Esta linea SI se ejecuta");
+
     }
 
     public static void metodo(String texto) {
