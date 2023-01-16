@@ -232,6 +232,13 @@ public class App {
         // }
         // System.out.println("Si se lanza la excepción y no la manejasmo, el programa explota. Esta linea SI se ejecuta");
 
+        Cuenta c = new Cuenta("asdf","Cuenta test", 100);
+        c.meterDinero(9); // esto no falla
+        System.out.println("Dinero: " + c.getSaldo());
+
+        // esto si falla
+        c.meterDinero(-9);
+
     }
 
     public static void metodo(String texto) {

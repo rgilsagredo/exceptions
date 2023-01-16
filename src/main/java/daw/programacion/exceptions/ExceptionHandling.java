@@ -1,8 +1,11 @@
 package daw.programacion.exceptions;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import javax.xml.catalog.Catalog;
 
 public class ExceptionHandling {
     /*
@@ -79,26 +82,72 @@ public class ExceptionHandling {
         }
     }
 
-    public static void variosCatch_v4(String rutaAFichero) {
+    // public static void variosCatch_v4(String rutaAFichero) {
+    //     try {
+    //         FileReader fr = new FileReader(rutaAFichero);
+    //         int value = fr.read();
+    //     } catch (IOException ioe) {
+    //         //
+    //     } catch (FileNotFoundException fnfe) {
+    //         // el compilador se queja de que exta exception ya está siendo manejada por
+    //         // IOException.
+    //         // lo que pasa es que FileNotFoundException es subclase de IOException
+    //     }
+    // }
+
+    /*
+     * try-catch-finally
+     * Puedo añadir un 3er bloque de código al try-catch, que es el finally. Lo que
+     * haya en finally SE
+     * EJECUTA SIEMPRE, HAYA EXPECTION O NO. Es más, se ejecuta tan "siempre" que
+     * sobreescribe
+     * (si procede) comandos de los bloques try y catch.
+     * El propósito de finally es código que se va a ejecutar siempre, haya
+     * excepction o no.
+     * Nomalmente se usa para cerrar recursos (no lo hemos visto aun, el ejemplo
+     * bueno es el filereader.
+     * Cuando abres con filereader un fichero, este se queda "abierto" por tu
+     * programa, y el fichero es inutilizable
+     * para el resto de programas. Para que tu programa lo libere, tienes que decir
+     * fr.close(). Si queda un
+     * objeto fr abierto, hay una excepción, y unca se cierra, tu recurso nunca es
+     * liberado. Finally viene a "resolverte" este problema)
+     */
+
+    public static void finallyBlock(String rutaAFichero) {
+        FileReader fr = null;
         try {
-            FileReader fr = new FileReader(rutaAFichero);
-            int value = fr.read();
-        } catch (IOException ioe) {
-            //
-        } catch (FileNotFoundException fnfe) {
-            // el compilador se queja de que exta exception ya está siendo manejada por
-            // IOException.
-            // lo que pasa es que FileNotFoundException es subclase de IOException
+            fr = new FileReader(rutaAFichero);
+            fr.read(); // si esto da error, fr.close nunca se ejecutará
+            fr.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                fr.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } // infelizmente, hay que declarar fr fuera, porque si no, el compilador no lo ve
+              // aquí
+              // es porque si salta la exception en la declaración, fr nunca exixtirá
         }
-    }
+    } // en cualquier caso, este código es muy feo, es mejor usar try-with-resources,
+      // que se encarga el solito de cerrar las cosas
+      // que explotan
+
+      public static void tryWithResources(String rutaAFichero){
+        try(FileReader fr = new FileReader(rutaAFichero)){
+            System.out.println("algo");
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        } // de esta manera no me hace falta un finally para cerrar recursos, si hay una exception o no, se hace solo
+      }
 
     /*
      * PDTE:
-     * finally block
-     * hacer que se lancen exceptions en tu código (ejemplo cuenta)
      * crear tus propias exceptions
-     * testear que se lanzan exceptions
-     * Ya que estamos, test parametrizados??
      */
 
 }
